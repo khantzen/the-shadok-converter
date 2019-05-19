@@ -8,9 +8,7 @@ shadok 0  = "GA"
 shadok 1  = "BU"
 shadok 2  = "ZO"
 shadok 3  = "MEU"
-shadok x
-    | x `mod` 4 == 0 = shadok ( x `div` 4 ) ++ "GA"
-    | otherwise      = shadok ( x `div` 4 ) ++ shadok ( x `mod` 4 )
+shadok x  = shadok ( x `div` 4 ) ++ shadok ( x `mod` 4 )
 
 
 main = hspec $ do
@@ -40,3 +38,9 @@ main = hspec $ do
 
         it "three shadoks verb number" $ do
             shadok 19 `shouldBe` "BUGAMEU"
+
+        it "big number" $ do
+            shadok 9999 `shouldBe` "ZOBUMEUGAGAMEUMEU"
+
+        it "very big number" $ do 
+            shadok 47850 `shouldBe` "ZOMEUZOZOMEUZOZOZO"
